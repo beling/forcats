@@ -1,0 +1,42 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Piotr Beling">
+    <title>Game for cats - Piotr Beling - 12.11.2021</title>
+    <style>
+        html,
+        body,
+        canvas {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: absolute;
+            background: white;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+<canvas id="glcanvas" tabindex='1' onclick="fullScreen()" ontouchstart="fullScreen()"></canvas>
+<!-- Minified and statically hosted version of https://github.com/not-fl3/macroquad/blob/master/js/mq_js_bundle.js -->
+<script src="https://not-fl3.github.io/miniquad-samples/mq_js_bundle.js"></script>
+<script>
+    load("forcats.wasm");
+    var elem = document.getElementById("glcanvas");
+    function fullScreen() {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+        }
+    }
+</script> <!-- Your compiled wasm file -->
+</body>
+
+</html>
