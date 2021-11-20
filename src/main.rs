@@ -56,9 +56,11 @@ impl Runner {
 
     fn draw(&self) {
         for i in 1..16 {
-            let c = (15 - i) as f32 / 15.0;
             draw_circle(self.position.x, self.position.y, self.radius-i as f32 * 3.0,
-                        Color::new(1.0, c, c, 1.0));
+                        Color::new(i as f32 / 15.0, 0.0, 0.0, 1.0));
+            /*let c = (15 - i) as f32 / 15.0;
+            draw_circle(self.position.x, self.position.y, self.radius-i as f32 * 3.0,
+                        Color::new(1.0, c, c, 1.0));*/
         }
     }
 
@@ -92,12 +94,22 @@ impl Default for Runner {
             destination_time: 0.0,
             state: RunnerState::Wait,
             position: p,
-            radius: 60.0
+            radius: 50.0
         }
     }
 }
 
-#[macroquad::main("forcats")]
+fn window_conf() -> Conf {
+    Conf {
+        window_title: "forcats".to_owned(),
+        //fullscreen: true,
+        high_dpi: true,
+        ..Default::default()
+    }
+}
+
+//#[macroquad::main("forcats")]
+#[macroquad::main(window_conf)]
 async fn main() {
     simulate_mouse_with_touch(false);
     let mut score = 0u32;
@@ -107,7 +119,7 @@ async fn main() {
         dot.update(frame_time);
         if dot.respawn_on_touch() { score += 1; }
 
-        clear_background(WHITE);
+        clear_background(BLACK);
         draw_text(&format!("{:>5}", score), 2.0, 20.0, 30.0, GRAY);
         dot.draw();
 
